@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>My To-Do App 📝</h2>
+
+    <input type="text" id="task-input" placeholder="Enter task...">
+    <button id="add-btn">Add</button>
+
+    <h3>My Tasks 😊:-</h3>
+    <ul id="task-list">
+        <!-- Tasks will appear here -->
+    </ul>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
