@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 buy milk
 buy milk|Personal|pending|2026-05-14
 birthday wish |Special Event|pending|2026-05-14
 buy milk|Shopping|pending|2026-05-14
+=======
+buy milk
+>>>>>>> 99d6e7c1718d9580bfa65baf8e5a75eadc45c4e6
