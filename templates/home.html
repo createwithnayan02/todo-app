@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+
+<h1 style="color:black;">HELLO TEST</h1>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" onclick="closeSidebar()">✖</a>
+    <a href="/home">Home</a>
+    <a href="#">Category</a>
+    <a href="/history">History</a>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <span class="menu-btn" onclick="openSidebar()">☰</span>
+    <h2>Hello Nayan !</h2>
+    <div class="profile">👤</div>
+</div>
+
+<!-- Main Content -->
+<div class="home-container">
+
+    <h3>Categories</h3>
+
+    <!-- your category boxes here -->
+
+    <!-- ✅ ADD FORM HERE -->
+    <form action="/add" method="POST" class="task-form">
+        
+        <input type="text" name="task" placeholder="Enter your task..." required>
+
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Design">Design</option>
+            <option value="Learning">Learning</option>
+            <option value="Hobby">Hobby</option>
+            <option value="Health">Health</option>
+            <option value="Finance">Finance</option>
+            <option value="Personal">Personal</option>
+            <option value="Special Event">Special Event</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
+           
+        </select>
+
+        <button type="submit">Add Task</button>
+
+    </form>
+
+</div>
+
+    <h3>Today's Tasks</h3>
+
+    <div class="today-tasks">
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task-card">
+    <h4>{{ task.name }}</h4>
+    <p>{{ task.category }} • {{ task.status }}</p>
+</div>
+            {% endfor %}
+        {% else %}
+            <p>No tasks yet</p>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
