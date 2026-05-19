@@ -51,21 +51,15 @@ addBtn.addEventListener("click", () => {
     displayTasks();
 });
 
-// Delete task
-function deleteTask(index) {
-    tasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    displayTasks();
+// Delete task , mark done
+
+
+function markDone(id) {
+    fetch(`/done/${id}`)
+        .then(() => location.reload());
 }
 
-// Initial load
-displayTasks();
-
-function  markDone(index) {
-    tasks[index].status="completed";
-    tasks[index].completedAt= new Date().toLocaleDateString();
-    
-    localStorage.setItem("tasks",JSON.stringify(tasks));
-    displayTasks();
-    
+function deleteTask(id) {
+    fetch(`/delete/${id}`)
+        .then(() => location.reload());
 }

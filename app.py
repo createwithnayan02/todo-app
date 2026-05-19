@@ -1,11 +1,27 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import os
+import sqlite3
 
 app = Flask(__name__)
 
 FILE_NAME = "text.txt"
+def init_db():
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS tasks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        category TEXT,
+        status TEXT,
+        date TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
 
 
 def read_tasks():
@@ -27,23 +43,48 @@ def splash():
 
 @app.route("/home")
 def home():
-    raw_tasks = read_tasks()
-    tasks = []
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
 
-    for task in raw_tasks:
-        parts = task.strip().split("|")
-        if len(parts) == 4:
-            tasks.append({
-                "name": parts[0],
-                "category": parts[1],
-                "status": parts[2],
-                "date": parts[3]
-            })
+    cursor.execute("SELECT * FROM tasks")
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    tasks = []
+    for row in rows:
+        tasks.append({
+            "id": row[0],
+            "name": row[1],
+            "category": row[2],
+            "status": row[3],
+            "date": row[4]
+        })
 
     return render_template("home.html", tasks=tasks)
+@app.route("/done/<int:id>")
+def mark_done(id):
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
 
+    cursor.execute("UPDATE tasks SET status='completed' WHERE id=?", (id,))
 
-from datetime import datetime
+    conn.commit()
+    conn.close()
+
+    return redirect("/home")
+
+@app.route("/delete/<int:id>")
+def delete_task(id):
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM tasks WHERE id=?", (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/home")
 
 @app.route("/add", methods=["POST"])
 def add():
@@ -52,50 +93,23 @@ def add():
 
     if task and category:
         date = datetime.now().strftime("%Y-%m-%d")
-        new_task = f"{task}|{category}|pending|{date}"
-        add_task_to_file(new_task)
+
+        conn = sqlite3.connect("tasks.db")
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "INSERT INTO tasks (name, category, status, date) VALUES (?, ?, ?, ?)",
+            (task, category, "pending", date)
+        )
+
+        conn.commit()
+        conn.close()
 
     return redirect("/home")
     
-
+if __name__ == "__main__":
+    init_db()
+    app.run(debug=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
-=======
-from flask import Flask, render_template, request, redirect
-
-app = Flask(__name__)
-
-FILE_NAME = "text.txt"
-
-
-# Read tasks from file
-def read_tasks():
-    with open(FILE_NAME, "r") as file:
-        return file.readlines()
-
-
-# Write one task to file
-def add_task_to_file(task):
-    with open(FILE_NAME, "a") as file:
-        file.write(task + "\n")
-
-
-@app.route("/")
-def index():
-    tasks = read_tasks()
-    tasks = [task.strip() for task in tasks]  # remove \n
-    return render_template("index.html", tasks=tasks)
-
-
-@app.route("/add", methods=["POST"])
-def add():
-    task = request.form.get("task")
-    if task:
-        add_task_to_file(task)
-    return redirect("/")
-    
-
-if __name__ == "__main__":
-    app.run(debug=True)
->>>>>>> 99d6e7c1718d9580bfa65baf8e5a75eadc45c4e6
