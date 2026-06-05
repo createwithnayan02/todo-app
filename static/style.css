@@ -261,3 +261,18 @@ h3 {
     color: white;
     border-radius: 8px;
 }
+.hero-section {
+    position: relative;
+    text-align: center;
+    margin-top:20px;
+}
+.hero-image{
+  width:300px;
+  max-width:90%;
+}
+.task-message{
+  margin-top:15px;
+  font-size:24;
+  color:#222;
+  font-weight:500;
+}

@@ -46,14 +46,27 @@ def home():
     conn = sqlite3.connect("tasks.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM tasks")
-    rows = cursor.fetchall()
+    cursor.execute("SELECT * FROM tasks WHERE status='pending' ")
+    pending_rows = cursor.fetchall()
+
+    cursor.execute("SELECT* FROM tasks WHERE status='completed' ")
+    completed_rows =cursor.fetchall()
+
 
     conn.close()
 
-    tasks = []
-    for row in rows:
-        tasks.append({
+    pending_tasks = []
+    for row in pending_rows:
+        pending_tasks.append({
+            "id": row[0],
+            "name": row[1],
+            "category": row[2],
+            "status": row[3],
+            "date": row[4]
+        })
+    completed_tasks=[]
+    for row in completed_rows:
+        completed_tasks.append({
             "id": row[0],
             "name": row[1],
             "category": row[2],
@@ -61,7 +74,8 @@ def home():
             "date": row[4]
         })
 
-    return render_template("home.html", tasks=tasks)
+    return render_template("home.html", pending_tasks=pending_tasks, completed_tasks=completed_tasks)
+
 @app.route("/done/<int:id>")
 def mark_done(id):
     conn = sqlite3.connect("tasks.db")

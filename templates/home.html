@@ -7,8 +7,13 @@
 </head>
 
 <body>
+    <div class="hero-section">
+        <img src="{{ url_for('static', filename='images/toDo_app_image.png') }}"
+     alt="Motivation"
+     class="hero-image">
+         <h1 class="text-message">You have {{ pending|length }} tasks today</h1>
+    </div>
 
-<h1 style="color:black;">HELLO TEST</h1>
 
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar">
@@ -62,14 +67,25 @@
     <h3>Today's Tasks</h3>
 
     <div class="today-tasks">
-        {% if tasks %}
-            {% for task in tasks %}
+        {% if pending_tasks %}
+            {% for task in pending_tasks %}
                 <div class="task-card">
     <h4>{{ task.name }}</h4>
 <p>{{ task.category }} • {{ task.status }}</p>
 <small>{{ task.date }}</small>
 <button onclick="markDone('{{ task.id }}')">Done</button>
     <button onclick="deleteTask('{{ task.id }}')">Delete</button>
+    {% if completed_tasks %}
+        <h3>Completed Tasks</h3>
+        {% for task in completed_tasks %}
+            <div class="task-card">
+                <h4>{{ task.name }}</h4>
+                <p>{{ task.category }} • {{ task.status }}</p>
+                <small>{{ task.date }}</small>
+                <button onclick="deleteTask('{{ task.id }}')">Delete</button>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
             {% endfor %}
         {% else %}
