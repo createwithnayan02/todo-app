@@ -11,7 +11,7 @@
         <img src="{{ url_for('static', filename='images/toDo_app_image.png') }}"
      alt="Motivation"
      class="hero-image">
-         <h1 class="text-message">You have {{ pending|length }} tasks today</h1>
+         <h1 class="text-message">You have {{ pending_count }} task{% if pending_count != 1 %}s{% endif %} today</h1>
     </div>
 
 
@@ -23,21 +23,19 @@
     <a href="/history">History</a>
 </div>
 
-<!-- Topbar -->
+
 <div class="topbar">
     <span class="menu-btn" onclick="openSidebar()">☰</span>
     <h2>Hello Nayan !</h2>
     <div class="profile">👤</div>
 </div>
 
-<!-- Main Content -->
+
 <div class="home-container">
 
     <h3>Categories</h3>
 
-    <!-- your category boxes here -->
-
-    <!-- ✅ ADD FORM HERE -->
+    
     <form action="/add" method="POST" class="task-form">
         
         <input type="text" name="task" placeholder="Enter your task..." required>
@@ -64,36 +62,77 @@
 
 </div>
 
-    <h3>Today's Tasks</h3>
+    
+   
+<h3>Today's Tasks</h3>
 
-    <div class="today-tasks">
-        {% if pending_tasks %}
-            {% for task in pending_tasks %}
-                <div class="task-card">
-    <h4>{{ task.name }}</h4>
-<p>{{ task.category }} • {{ task.status }}</p>
-<small>{{ task.date }}</small>
-<button onclick="markDone('{{ task.id }}')">Done</button>
-    <button onclick="deleteTask('{{ task.id }}')">Delete</button>
-    {% if completed_tasks %}
-        <h3>Completed Tasks</h3>
-        {% for task in completed_tasks %}
+<div class="today-tasks">
+
+    {% if pending_tasks %}
+
+        {% for task in pending_tasks %}
+
             <div class="task-card">
+
                 <h4>{{ task.name }}</h4>
+
                 <p>{{ task.category }} • {{ task.status }}</p>
+
                 <small>{{ task.date }}</small>
-                <button onclick="deleteTask('{{ task.id }}')">Delete</button>
+
+                <div class="task-buttons">
+
+                    <button onclick="markDone('{{task.id}}')">Done</button>
+                    <button onclick="deleteTask('{{task.id}}')">Delete</button>
+
+                </div>
+
             </div>
+
         {% endfor %}
+
+    {% else %}
+
+        <p>No pending tasks.</p>
+
     {% endif %}
-</div>
-            {% endfor %}
-        {% else %}
-            <p>No tasks yet</p>
-        {% endif %}
-    </div>
 
 </div>
 
+
+
+<h3>Completed Tasks</h3>
+
+<div class="completed-tasks">
+
+    {% if completed_tasks %}
+
+        {% for task in completed_tasks %}
+
+            <div class="task-card">
+
+                <h4>{{ task.name }}</h4>
+
+                <p>{{ task.category }} • {{ task.status }}</p>
+
+                <small>{{ task.date }}</small>
+
+                <div class="task-buttons">
+
+                    <button onclick="deleteTask('{{task.id}}')">Delete</button>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No completed tasks yet.</p>
+
+    {% endif %}
+
+</div>
 </body>
 </html>

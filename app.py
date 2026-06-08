@@ -15,6 +15,7 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         category TEXT,
+                   
         status TEXT,
         date TEXT
     )
@@ -23,17 +24,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-
-def read_tasks():
-    if not os.path.exists(FILE_NAME):
-        return []
-    with open(FILE_NAME, "r") as file:
-        return file.readlines()
-
-
-def add_task_to_file(task):
-    with open(FILE_NAME, "a") as file:
-        file.write(task + "\n")
 
 
 @app.route("/")
@@ -64,6 +54,8 @@ def home():
             "status": row[3],
             "date": row[4]
         })
+        pending_count = len(pending_tasks)
+
     completed_tasks=[]
     for row in completed_rows:
         completed_tasks.append({
@@ -74,7 +66,7 @@ def home():
             "date": row[4]
         })
 
-    return render_template("home.html", pending_tasks=pending_tasks, completed_tasks=completed_tasks)
+    return render_template("home.html", pending_tasks=pending_tasks, completed_tasks=completed_tasks, pending_count=pending_count)
 
 @app.route("/done/<int:id>")
 def mark_done(id):
@@ -125,5 +117,3 @@ if __name__ == "__main__":
     init_db()
     app.run(debug=True)
 
-if __name__ == "__main__":
-    app.run(debug=True)
