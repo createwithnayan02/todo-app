@@ -15,7 +15,7 @@
     </div>
 
 
-<!-- Sidebar -->
+
 <div id="sidebar" class="sidebar">
     <a href="javascript:void(0)" onclick="closeSidebar()">✖</a>
     <a href="/home">Home</a>
@@ -29,41 +29,12 @@
     <h2>Hello Nayan !</h2>
     <div class="profile">👤</div>
 </div>
-
-
-<div class="home-container">
-
-    <h3>Categories</h3>
-
-    
-    <form action="/add" method="POST" class="task-form">
-        
-        <input type="text" name="task" placeholder="Enter your task..." required>
-
-        <select name="category" required>
-            <option value="">Select Category</option>
-            <option value="Meeting">Meeting</option>
-            <option value="Design">Design</option>
-            <option value="Learning">Learning</option>
-            <option value="Hobby">Hobby</option>
-            <option value="Health">Health</option>
-            <option value="Finance">Finance</option>
-            <option value="Personal">Personal</option>
-            <option value="Special Event">Special Event</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Work">Work</option>
-            <option value="Other">Other</option>
-           
-        </select>
-
-        <button type="submit">Add Task</button>
-
-    </form>
-
+<div class="add-more-container">
+    <a href="/add-task" class="add-more-btn">
+        ➕ Add More Tasks
+    </a>
 </div>
 
-    
-   
 <h3>Today's Tasks</h3>
 
 <div class="today-tasks">

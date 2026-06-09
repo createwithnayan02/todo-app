@@ -25,10 +25,13 @@ def init_db():
     conn.close()
 
 
-
 @app.route("/")
 def splash():
-    return render_template("splash.html")   # 👈 splash back
+    return render_template("splash.html")
+
+@app.route("/add-task")
+def add_task_page():
+    return render_template("add_task.html")
 
 
 @app.route("/home")
@@ -41,7 +44,6 @@ def home():
 
     cursor.execute("SELECT* FROM tasks WHERE status='completed' ")
     completed_rows =cursor.fetchall()
-
 
     conn.close()
 
