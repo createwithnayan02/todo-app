@@ -4,9 +4,20 @@
         <title>Add task</title>
     </head>
     <body>
+        <h1>WORKING</h1>
+        <div class="add task-container">
+            <a href="/home" class="back-btn">← Back</a>
+            <h2>🌷 What's on your mind today?</h2>
+           <p>One small step today is still progress.</p>
+
 <form action="/add" method="POST" class="task-form">
     
-    <input type="text" name="task" placeholder="Enter your task..." required>
+    <textarea 
+    name="task"
+     placeholder="Write your thoughts, goals, or tasks for today..." 
+    rows="6"
+    required>
+    </textarea>
 
     <select name="category" required>
         <option value="">Select Category</option>
@@ -23,8 +34,9 @@
         <option value="Other">Other</option>
     </select>
 
-    <button type="submit">Add Task</button>
+    <button type="submit">Save Task</button>
 
 </form>
+</div>
 </body>
 </html>

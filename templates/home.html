@@ -35,26 +35,31 @@
     </a>
 </div>
 
-<h3>Today's Tasks</h3>
 
+<h1>working</h1>
 <div class="today-tasks">
+    <h3>Today's Tasks</h3>
 
-    {% if pending_tasks %}
 
-        {% for task in pending_tasks %}
+   {% if pending_tasks %}
+ 
+     {% for task in pending_tasks %}
 
-            <div class="task-card">
+        <div class="task-card">
 
-                <h4>{{ task.name }}</h4>
+           <div class="task-header">
 
-                <p>{{ task.category }} • {{ task.status }}</p>
+              <div class="task-text">
+               <h4>{{ task.name }}</h4>
+               <p>{{ task.icon }} {{ task.category }}</p>
+               <small>{{ task.date }}</small>
+                    </div>
+  
+                  <div class="task-buttons">
+                  <button class="done-btn" onclick="markDone('{{ task.id }}')"> ✓ </button>
 
-                <small>{{ task.date }}</small>
-
-                <div class="task-buttons">
-
-                    <button onclick="markDone('{{task.id}}')">Done</button>
-                    <button onclick="deleteTask('{{task.id}}')">Delete</button>
+                  <button class="delete-btn" onclick="deleteTask('{{ task.id }}')"> 🗑 </button>
+                  </div>
 
                 </div>
 
@@ -72,29 +77,28 @@
 
 
 
-<h3>Completed Tasks</h3>
 
 <div class="completed-tasks">
+    <h3>Completed Tasks</h3>
 
     {% if completed_tasks %}
 
-        {% for task in completed_tasks %}
+     {% for task in completed_tasks %}
 
-            <div class="task-card">
+        <div class="task-card">
+         <div class="task-header">
 
-                <h4>{{ task.name }}</h4>
-
-                <p>{{ task.category }} • {{ task.status }}</p>
-
-                <small>{{ task.date }}</small>
-
-                <div class="task-buttons">
-
-                    <button onclick="deleteTask('{{task.id}}')">Delete</button>
-
+            <div class="task-text">
+              <h4>{{ task.name }}</h4>
+              <p>{{ task.icon }} {{ task.category }}</p>
+              <small>{{ task.date }}</small>
                 </div>
 
-            </div>
+            <div class="task-buttons">
+             <button class="delete-btn" onclick="deleteTask('{{ task.id }}')"> 🗑 </button>
+             </div>
+                </div>
+                  </div>
 
         {% endfor %}
 

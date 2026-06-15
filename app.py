@@ -47,6 +47,20 @@ def home():
 
     conn.close()
 
+    category_icons = {
+    "Learning": "📚",
+    "Work": "💼",
+    "Health": "💪",
+    "Shopping": "🛍",
+    "Personal": "🏠",
+    "Hobby": "🎨",
+    "Finance": "💰",
+    "Meeting": "📅",
+    "Design": "🖌️",
+    "Special Event": "🎉",
+    "Other": "📌"
+}
+
     pending_tasks = []
     for row in pending_rows:
         pending_tasks.append({
@@ -54,7 +68,8 @@ def home():
             "name": row[1],
             "category": row[2],
             "status": row[3],
-            "date": row[4]
+            "date": row[4],
+            "icon": category_icons.get(row[2], "📌")
         })
         pending_count = len(pending_tasks)
 
@@ -65,7 +80,8 @@ def home():
             "name": row[1],
             "category": row[2],
             "status": row[3],
-            "date": row[4]
+            "date": row[4],
+            "icon": category_icons.get(row[2], "📌")
         })
 
     return render_template("home.html", pending_tasks=pending_tasks, completed_tasks=completed_tasks, pending_count=pending_count)
@@ -98,8 +114,11 @@ def delete_task(id):
 def add():
     task = request.form.get("task")
     category = request.form.get("category")
+    print("Task:", task)
+    print("Category:", category)
 
-    if task and category:
+    if task:
+        category=category or "other"
         date = datetime.now().strftime("%Y-%m-%d")
 
         conn = sqlite3.connect("tasks.db")
