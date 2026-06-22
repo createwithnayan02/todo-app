@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+<a href="/" class="nav-btn">Home</a>
+<a href="/history" class="nav-btn">Completed Tasks</a>
+<h2>Add New Task</h2>
+<form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Enter Your Task"required>
+    <button type="submit">Add Task</button>
+</form>
+<hr>
+<h3>My Tasks</h3>
+<div class="task-box">
+    <h3>{{task.name}}</h3>
+    <p>Status:{{task.status}}</p>
+    <p>Created:{{task.date}}</p>
+</div>
+</body>
+</html>

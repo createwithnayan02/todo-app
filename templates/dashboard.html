@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <titel>Task Dashboard</titel>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    
+    </head>
+    <body>
+        
+       <div class="app-container">
+        <!--sidebar-->
+        <div class="sidebar">
+            <h2 class="logo">TaskFlow</h2>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/index">Current Tasks</a>
+            <a href="/history">History</a>
+        </div>
+        <!--main content-->
+        <div class="main-content">
+        <h1> Welcome back 👋</h1>
+        <h2>Dashboard</h2>
+          <div class="cards">
+            <div class="card">
+            <h3>Total Tasks</h3>
+            <p>0</p>
+           </div>
+           <div class="card">
+            <h3>Completed</h3>
+            <p>0</p>
+           </div>
+           <div class="card">
+            <h3>Pending</h3>
+            <p>0</p>
+           </div>
+        </div>
+       </div>
+    </body>
+        
+
+</html>
