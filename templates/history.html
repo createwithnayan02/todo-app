@@ -5,8 +5,40 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Completed Tasks</h1>
+        
         <ul id="history-list"></ul>
         <script src="{{url_for('static',filename='history.js')}}"></script>
+        <div class="completed-tasks">
+            <a href="/home" class="back-btn2">← Back</a>
+
+    {% if completed_tasks %}
+
+     {% for task in completed_tasks %}
+
+        <div class="task-card">
+         <div class="task-header">
+
+            <div class="task-text">
+              <h4>{{ task.name }}</h4>
+              <p>{{ task.icon }} {{ task.category }}</p>
+              <small>{{ task.date }}</small>
+                </div>
+
+            <div class="task-buttons">
+             <button class="delete-btn" onclick="deleteTask('{{ task.id }}')"> 🗑 </button>
+             </div>
+                </div>
+                  </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No completed tasks yet.</p>
+
+    {% endif %}
+
+</div>
     </body>
+
 </html>

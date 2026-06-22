@@ -1,15 +1,10 @@
+/* main styles for the task management app */
+
 body {
   background-color: #f3bce7;
   font-family: "Segoe UI", sans-serif;
-}
-
-.container {
-  width: 350px;
-  margin: 80px auto;
-  background: rgb(228, 149, 248);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    margin: 0;
+   
 }
 
 h2 {
@@ -44,6 +39,8 @@ li {
   border-radius: 8px;
 }
 
+/* Sidebar styles */
+
 .nav-btn{
   background-color: #45a049;
 }
@@ -51,32 +48,89 @@ li {
 body{
   margin: 0;
   font-family: 'segoe UI',sans-serif;
-  background:#f5f6fa;
+  background:white;
 
 }
 .layout {
   display:flex;
 
 }
-.sidebar{
-  width:220px;
-  height:100vh;
-  background: #6c63ff;
-  color:white;
-  padding:30px;
+
+.sidebar {
+    height: 100%;
+    width: 0;                     
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    background-color:#cdcfcd;
+    overflow-x: hidden;           
+    transition: 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
 }
-.sidebar a{
-  display:block;
-  color:white;
-  text-decoration:none;
-  margin:15px 0;
-  font-size:16px;
+
+
+.sidebar a {
+    display: block;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    white-space: nowrap;         
+    transition: 0.2s;
 }
+
+
+.sidebar a:hover {
+    background-color: #cdcfcd;
+    color: #909996;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Topbar styles */
+
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color:#cdcfcd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile {
+    font-size: 24px;
+}
+
+.menu-btn{
+    font-size: 28px;
+    cursor: pointer;
+}
+
 .main{
   flex:1;
   padding:40px;
-
 }
+
+/* Card styles */
+
 .cards{
   display:flex;
   gap:25px;
@@ -84,7 +138,7 @@ body{
 
 }
 .card{
-  background: white;
+  background:rgb(146, 145, 145);
   padding:30px;
   border-radius:14px;
   width:220px;
@@ -96,7 +150,7 @@ body{
   display:inline-block;
   margin-top:15px;
   text-decoration: none;
-  background: #6c63ff;
+  background: rgb(228, 224, 224);
   color:white;
   padding:8px 14px;
   border-radius:6px;
@@ -109,7 +163,7 @@ body{
 
 }
 .card {
-  background: white;
+  background: rgb(228, 224, 224);
   padding:20px;
   flex:1;
   border-radius:10px;
@@ -124,6 +178,14 @@ body{
   font-size:28px;
   font-weight:bold;
 }
+
+.today-tasks h3{
+  justify-content: center;
+  display: flex;
+}
+
+/* Splash screen styles */
+
 .splash-body{
   background:#111;
   color:#ddd;
@@ -144,42 +206,17 @@ margin-bottom:10px;
 font-size:18px;
 opacity:0.8;
 }
+
+/* App container styles */
+
 .app-container{
   display:flex;
   height:100vh;
   font-family:Arial, Helvetica, sans-serif;
 }
 
-.sidebar{
-  width:220px;
-  background: #111;
-  color:white;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-}
-.sidebar .logo {
-  margin-bottom:30px;
-}
-
-.sidebar a {
-  color:white;
-  text-decoration:none;
-  margin:10px 0;
-  padding:8px;
-  border-radius: 5px;
-}
-.sidebar a :hover {
-  background: #333;
-}
-.main-content{
-  flex:1;
-  padding:40px;
-  background: #f5f5f5;
-}
-
 .task-card {
-    background: white;
+    background:rgb(228, 224, 224);
     max-width:700px;
     margin:20px auto;
     padding: 20px 24px;
@@ -199,7 +236,7 @@ opacity:0.8;
   margin:5px 0;
 }
 .task-text small{
-  color:#777;
+  color:#3b3b3b;
 
 }
 
@@ -221,6 +258,7 @@ opacity:0.8;
     font-weight: 500;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
+
 .home-container {
     padding: 20px;
 }
@@ -228,6 +266,9 @@ opacity:0.8;
 h3 {
     margin-top: 25px;
 }
+
+/* Task form styles (add task) */
+
 .task-form {
     display: flex;
     gap: 10px;
@@ -248,6 +289,9 @@ h3 {
     color: white;
     border-radius: 8px;
 }
+
+/* Hero section styles */
+
 .hero-section {
     position: relative;
     text-align: center;
@@ -264,6 +308,8 @@ h3 {
   font-weight:500;
 }
 
+/* Added task container styles */
+
 .add-task-container {
     max-width: 600px;
     margin: 50px auto;
@@ -276,7 +322,7 @@ h3 {
 
 .back-btn{
     text-decoration: none;
-    background: #6c63ff;
+    background: #7e7e80;
     color:white;
     font-size:18px;
     display:inline-block;
@@ -285,6 +331,8 @@ h3 {
     margin-bottom:25px;
 
 }
+
+/* Task form styles */
 
 .task-form textarea {
     width: 100%;
@@ -312,7 +360,7 @@ h3 {
     padding:15px;
     border: none;
     border-radius:14px;
-    background: #6c63ff;
+    background: #7e7e80;
     color:white;
     font-size:18px;
     cursor:pointer;
@@ -369,23 +417,157 @@ h3 {
     transform: translateY(-2px);
 }
 
-.done-btn{
-    background:#dff6dd;
-    color:#2e7d32;
+.done-btn {
+    background: #E4F7EF;
+    color: #2E8B72;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
-.done-btn:hover{
-    background:#c8e6c9;
+.done-btn:hover {
+    background: #CFF3E3;
 }
-.delete-btn{
-    background:#ffe5e5;
-    color:#2e7d32;
+.delete-btn {
+    background: #FDE7EE;
+    color: #E5396B;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
-.delete-btn:hover{
-    background:#ffd4d4;
+
+.delete-btn:hover {
+    background: #F9D0DB;
 }
 .today-tasks h3, .completed-tasks h3 {
     max-width: 700px;
     margin: 40px auto 15px auto;
     font-size: 28px;
     font-weight: 700;
+}
+
+/* New task button styles (+)*/
+
+
+.new-task-container{
+    max-width: 700px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.new-task-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    color: #4b4c4d;
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.plus-icon{
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #3d3d3d;
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+}
+
+.new-task-btn:hover{
+    opacity: 0.8;
+}
+
+/* add_task section */
+.back-btn {
+   position: fixed;
+    top: 20px;
+    left: 20px;
+
+    height: 38px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    background: #7e7e80;
+    text-decoration: none;
+    color: black;
+}
+body {
+    margin: 0;
+    background: white;
+    font-family: Arial;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.task-box {
+    width: 700px;
+    max-width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+
+    position: relative;
+}
+
+.task-textarea {
+    width: 100%;
+    min-height: 100px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    resize: none;
+    padding: 10px;
+}
+
+.add-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+/* Back button styles for history page */
+.back-btn2 {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    height: 38px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    background: #7e7e80;
+    text-decoration: none;
+    color: black;
 }

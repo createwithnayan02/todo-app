@@ -7,6 +7,12 @@
 </head>
 
 <body>
+    <div class="topbar">
+    <span class="menu-btn" onclick="openSidebar()">☰</span>
+    <h2>Hello Nayan !</h2>
+    <div class="profile">👤</div>
+</div>
+
     <div class="hero-section">
         <img src="{{ url_for('static', filename='images/toDo_app_image.png') }}"
      alt="Motivation"
@@ -19,24 +25,12 @@
 <div id="sidebar" class="sidebar">
     <a href="javascript:void(0)" onclick="closeSidebar()">✖</a>
     <a href="/home">Home</a>
-    <a href="#">Category</a>
     <a href="/history">History</a>
+    <a href="/add-task">Add Task</a>
 </div>
 
 
-<div class="topbar">
-    <span class="menu-btn" onclick="openSidebar()">☰</span>
-    <h2>Hello Nayan !</h2>
-    <div class="profile">👤</div>
-</div>
-<div class="add-more-container">
-    <a href="/add-task" class="add-more-btn">
-        ➕ Add More Tasks
-    </a>
-</div>
 
-
-<h1>working</h1>
 <div class="today-tasks">
     <h3>Today's Tasks</h3>
 
@@ -75,39 +69,12 @@
 
 </div>
 
-
-
-
-<div class="completed-tasks">
-    <h3>Completed Tasks</h3>
-
-    {% if completed_tasks %}
-
-     {% for task in completed_tasks %}
-
-        <div class="task-card">
-         <div class="task-header">
-
-            <div class="task-text">
-              <h4>{{ task.name }}</h4>
-              <p>{{ task.icon }} {{ task.category }}</p>
-              <small>{{ task.date }}</small>
-                </div>
-
-            <div class="task-buttons">
-             <button class="delete-btn" onclick="deleteTask('{{ task.id }}')"> 🗑 </button>
-             </div>
-                </div>
-                  </div>
-
-        {% endfor %}
-
-    {% else %}
-
-        <p>No completed tasks yet.</p>
-
-    {% endif %}
-
+<div class="new-task-container">
+    <a href="/add-task" class="new-task-btn">
+        <span class="plus-icon">+</span>
+        <span>New Task</span>
+    </a>
 </div>
+
 </body>
 </html>
