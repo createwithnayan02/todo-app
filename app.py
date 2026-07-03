@@ -15,8 +15,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        category TEXT,
-                   
+        category TEXT,       
         status TEXT,
         date TEXT
     )
@@ -143,6 +142,7 @@ def delete_task(id):
 
     return redirect("/home")
 
+
 CATEGORY_KEYWORDS = {
 
     "Learning": [
@@ -231,6 +231,16 @@ def get_category(task):
                 return category
 
     return "Other"
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/home")
+
 
 @app.route("/add", methods=["POST"])
 def add():

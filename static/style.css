@@ -536,9 +536,10 @@ body {
     min-height: 100px;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 18px;
     resize: none;
     padding: 10px;
+    font-style:Poppins ;
 }
 
 .add-btn {
@@ -571,3 +572,57 @@ body {
     text-decoration: none;
     color: black;
 }
+/*dashboard page */
+.dashboard-container{
+  width:100%;
+  min-height:100vh;
+  padding:30px;
+  box-sizing:border-box;
+}
+
+.dashboard-content{
+  background:#cdcfcd;
+}
+
+.dashboard-header{
+  margin-bottom:30px;
+}
+
+.dashboard-content{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+
+.dashboard-card{
+  background:#cdcfcd;
+  box-shadow: 0 4px 12px rgba(0,0 ,0,0.08);
+  padding:20px;
+}
+
+.card-title{
+  margin-bottom:20px;
+}
+
+.score-card{
+  min-height:250px;
+}
+
+.weekly-card{
+  min-height: 350px;
+}
+
+.stats-card{
+  min-height:220px;
+
+}
+
+.category-card{
+  min-height:220px;
+}
+
+.achievement-card{
+  min-height:220px;
+}
+

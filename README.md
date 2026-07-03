@@ -44,9 +44,10 @@ This project is built to strengthen full-stack development skills using Flask an
 
 ##  Screenshots
 
+
 ### Home Page
 ![Home](assets/home.png)
-![Home](assets/today'stask_addTask.png)
+![Home](assets/today's task_addTask.png)
 
 ### Add Task Page
 ![Add Task](assets/addTask.png)

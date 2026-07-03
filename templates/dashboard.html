@@ -1,40 +1,111 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <titel>Task Dashboard</titel>
-        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-    
-    </head>
-    <body>
-        
-       <div class="app-container">
-        
-        <div class="sidebar">
-            <h2 class="logo">TaskFlow</h2>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/index">Current Tasks</a>
-            <a href="/history">History</a>
-        </div>
-        
-        <div class="main-content">
-        <h1> Welcome back 👋</h1>
-        <h2>Dashboard</h2>
-          <div class="cards">
-            <div class="card">
-            <h3>Total Tasks</h3>
-            <p>0</p>
-           </div>
-           <div class="card">
-            <h3>Completed</h3>
-            <p>0</p>
-           </div>
-           <div class="card">
-            <h3>Pending</h3>
-            <p>0</p>
-           </div>
-        </div>
-       </div>
-    </body>
-        
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+</head>
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+<script src="{{url_for('static',filename='script.js')}}"></script>
+<body>
 
+    <div class="dashboard-container">
+           <header class="dashboard-header">
+            
+             <h1>Good Evening, Nayan 👋</h1>
+             <p>Keep up the great work today!</p>
+
+
+           </header>
+
+           <main class="dashboard-content">
+        
+           <section class="dashboard-card score-card">
+            <h2 class="card-title">Today's Score</h2>
+             <div class="card-content" >
+             <div class="progress-circle-placeholder">
+              progress circle 
+              <span class="score-text">75%</span></div>
+             <div class="completed">
+              <p>completed:15/20</p>
+             </div>
+             <div class="pending">
+              <p>pending:5 tasks </p>
+             </div>
+             <div class="added-today">
+              <p>added today: 3 tasks</p>
+             </div>
+             </div>
+           </section>
+
+              <section class="dashboard-card weekly-card">
+                <h2 class="card-title">Weekly Progress</h2>
+                 <div class="card-content" >
+                   <p>+18% Better than last week</p>
+                   <p> this week:33 tasks </p>
+                   <p> last week:28 tasks</p>
+                   <div class="graph">
+                    <p>-----------------------------------------</p>
+                   <div class="graph-placeholder">Graph coming here</div>
+                    <p>-----------------------------------------</p>
+                   </div>
+                 </div>
+           </section>
+
+           <section class="dashboard-card category-card">
+             <h2 class="card-title">Category Distribution</h2>
+             <div class="card-content" >
+               <div class="category-items">
+                <span>Study</span>
+                <span>40%</span>
+                </div>
+                <div class="category-items">
+                <span>Work</span>
+                <span>30%</span>
+                </div>
+                <div class="category-items">
+                <span>Personal</span>
+                <span>30%</span>
+                </div>
+                <div class="category-items">
+                <span>Health</span>
+                <span>0%</span>
+                </div>
+              </div>
+              
+           </section>
+
+           <section class="dashboard-card stats-card">
+             <h2 class="card-title">Statistics</h2>
+             <div class="card-content" >
+              <div class="stat-item">
+                 <span>Total Tasks</span>
+                 <span>248</span>
+              </div>
+
+            <div class="stat-item">
+                <span>Completed Tasks</span>
+                <span>15</span>
+            </div>
+
+           <div class="stat-item">
+             <span>Pending Tasks</span>
+             <span>5</span>
+           </div>
+            </div>
+
+           </section>
+
+           <section class="dashboard-card achievement-card">
+             <h2 class="card-title">Achievements</h2>
+             <div class="card-content" >
+                      <p> 🔥 5 Day Streak</p>
+                      <p>⭐ Perfect Day</p>
+                      <p>💯 Completed 100 Tasks</p>
+             </div>
+           </section>
+
+         
+    </main>
+  </div>
+    
+</body>
 </html>
