@@ -573,56 +573,213 @@ body {
     color: black;
 }
 /*dashboard page */
+
+/*dashboard container styles */
+
 .dashboard-container{
-  width:100%;
-  min-height:100vh;
-  padding:30px;
-  box-sizing:border-box;
+    width:100%;
+    min-height:100vh;
+    padding:30px;
+    box-sizing:border-box;
+    background:#f5f6fa;
+
+    display:flex;
+    flex-direction:column;
+    gap:40px;
 }
+
+/* HEADER */
+
+.dashboard-header h1{
+    margin:0;
+    font-size:32px;
+}
+
+.dashboard-header p{
+    margin-top:8px;
+    color:#666;
+    font-size:16px;
+}
+
+/* CONTENT */
 
 .dashboard-content{
-  background:#cdcfcd;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
 }
 
-.dashboard-header{
-  margin-bottom:30px;
-}
-
-.dashboard-content{
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-}
-
+/* CARDS */
 
 .dashboard-card{
-  background:#cdcfcd;
-  box-shadow: 0 4px 12px rgba(0,0 ,0,0.08);
-  padding:20px;
+    background:#ffffff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .card-title{
-  margin-bottom:20px;
+    margin-bottom:20px;
+    font-size:22px;
 }
 
+/* CARD CONTENT */
+
+.card-content{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* SCORE CARD */
+
+.circle-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.progress-circle-placeholder{
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:#dbeafe;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+}
+
+.score-text{
+    font-size:32px;
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
+.score-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #eeeeee;
+}
+
+.score-item:last-child{
+    border-bottom:none;
+}
+
+/* Weekly card */
+
+.weekly-change{
+    font-size:18px;
+    font-weight:bold;
+    color:#16a34a;
+}
+
+.weekly-stat{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:8px 0;
+}
+
+.graph{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:15px;
+}
+
+.graph-placeholder{
+    width:100%;
+    height:220px;
+
+    border:2px dashed #bdbdbd;
+    border-radius:15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#777;
+    background:#fafafa;
+}
+
+/* Category */
+
+.category-items{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #eeeeee;
+}
+
+.category-items:last-child{
+    border-bottom:none;
+}
+
+/* Statistics */
+
+.stat-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #eeeeee;
+}
+
+.stat-item:last-child{
+    border-bottom:none;
+}
+
+/* Achievement*/
+
+.achievement-item{
+    background:#f3f4f6;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    font-weight:500;
+}
+
+.achievement-item:last-child{
+    margin-bottom:0;
+}
+
+
+
 .score-card{
-  min-height:250px;
+    min-height:420px;
 }
 
 .weekly-card{
-  min-height: 350px;
-}
-
-.stats-card{
-  min-height:220px;
-
+    min-height:450px;
 }
 
 .category-card{
-  min-height:220px;
+    min-height:250px;
+}
+
+.stats-card{
+    min-height:250px;
 }
 
 .achievement-card{
-  min-height:220px;
+    min-height:220px;
 }
-
