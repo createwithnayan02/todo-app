@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add task</title>
-    </head>
-    <body>
-<form action="/add" method="POST" class="task-form">
-    
-    <input type="text" name="task" placeholder="Enter your task..." required>
+<head>
+    <title>Add task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
 
-    <select name="category" required>
-        <option value="">Select Category</option>
-        <option value="Meeting">Meeting</option>
-        <option value="Design">Design</option>
-        <option value="Learning">Learning</option>
-        <option value="Hobby">Hobby</option>
-        <option value="Health">Health</option>
-        <option value="Finance">Finance</option>
-        <option value="Personal">Personal</option>
-        <option value="Special Event">Special Event</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Work">Work</option>
-        <option value="Other">Other</option>
-    </select>
+<body>
 
-    <button type="submit">Add Task</button>
+<!-- Back button -->
+<a href="/home" class="back-btn">← Back</a>
+<h2>Add a task and stay organized</h2>
 
-</form>
+<div class="container">
+
+    <form action="/add" method="POST" class="task-box">
+
+        <textarea
+            name="tasks"
+            id="task-textarea"
+            class="task-textarea"
+            placeholder="Write your task here...">
+        </textarea>
+
+        <button type="submit" class="add-btn">+</button>
+
+    </form>
+
+</div>
+
 </body>
 </html>
