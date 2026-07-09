@@ -10,7 +10,7 @@
     <div class="dashboard-container">
            <header class="dashboard-header">
             
-             <h1>Good Evening, Nayan 👋</h1>
+             <h1>{{ greeting }}, Nayan 👋</h1>
              <p>Keep up the great work today!</p>
 
 
@@ -24,21 +24,21 @@
               <div class="circle-container">
                 <div class="progress-circle-placeholder">
                   progress circle 
-                <span class="score-text">75%</span></div>
+                <span class="score-text">{{ (completed_percentage) }}%</span></div>
                 </div>
                 <div class="score-item">
                 <span>completed</span>
-                <span>5/10</span>
+                <span>{{completed_tasks}}</span>
                 </div>
                 <div class="score-item">
                   <span>pending</span>
                 <span>pending</span>
-                <span>5/10</span>
+                <span>{{pending_tasks}}</span>
                 </div>
                 <div class="score-item">
                 <span>added today</span>
                 <span>added today</span>
-                <span>8/10</span>
+                <span>{{today_tasks}}</span>
                 </div>
                 
                 </div>
@@ -48,15 +48,19 @@
                 <h2 class="card-title">Weekly Progress</h2>
                  <div class="card-content" >
                   <div class="weekly-change">
-                   <p>+18% Better than last week</p>
+                   {% if weekly_change is none %}
+                   <p>{{ comparison }}</p>
+                   {% else %}
+                   <p>{{ weekly_change }}% {{ comparison }}</p>
+                   {% endif %}
                    </div>
                    <div class="weekly-stat">
                    <span> this week</span>
-                   <span>28 tasks</span>
+                   <span>{{this_week_tasks}} tasks</span>
                    </div>
                    <div class="weekly-stat">
                     <span>last week</span>
-                    <span>18 tasks</span>
+                    <span> {{last_week_tasks}} tasks</span>
                    </div>
                    <div class="graph">
                     
@@ -70,20 +74,48 @@
              <h2 class="card-title">Category Distribution</h2>
              <div class="card-content" >
                <div class="category-items">
-                <span>Study</span>
-                <span>40%</span>
+                <span>Learning</span>
+                <span>{{ Learning_percentage }}%</span>
                 </div>
                 <div class="category-items">
                 <span>Work</span>
-                <span>30%</span>
+                <span>{{ Work_percentage }}%</span>
                 </div>
                 <div class="category-items">
                 <span>Personal</span>
-                <span>30%</span>
+                <span>{{ Personal_percentage }}%</span>
                 </div>
                 <div class="category-items">
                 <span>Health</span>
-                <span>0%</span>
+                <span>{{ Health_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Shopping</span>
+                <span>{{ Shopping_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Hobby</span>
+                <span>{{ Hobby_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Finance</span>
+                <span>{{ Finance_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Meeting</span>
+                <span>{{ Meeting_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Design</span>
+                <span>{{ Design_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Special Event</span>
+                <span>{{ Special_percentage }}%</span>
+                </div>
+                <div class="category-items">
+                <span>Other</span>
+                <span>{{ Other_percentage }}%</span>
                 </div>
               </div>
               

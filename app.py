@@ -1,11 +1,10 @@
 
 from asyncio import tasks
-
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import os
 import sqlite3
-
+from datetime import datetime, timedelta
 app = Flask(__name__)
 
 FILE_NAME = "text.txt"
@@ -236,13 +235,161 @@ def get_category(task):
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
 
-    conn.commit()
+    current_hour = datetime.now().hour
+    if 5 <= current_hour < 12:
+        greeting= "Good Morning"
+    elif 12 <= current_hour < 17:
+        greeting= "Good Afternoon"
+    else:
+        greeting= "Good Evening"
+
+
+
+    conn = sqlite3.connect("tasks.db")
+    cursor =conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM tasks")
+    total_tasks= cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM tasks WHERE status='pending' ")
+    pending_tasks = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM tasks WHERE status='completed'")
+    completed_tasks = cursor.fetchone()[0]
+  
+    if total_tasks > 0:
+        completed_percentage = round((completed_tasks / total_tasks) * 100)
+    else:
+        completed_percentage = 0
+
+    today = datetime.now()
+    seven_days_ago = today - timedelta(days=7)
+    fourteen_days_ago = today - timedelta(days=14)
+
+    today_str = today.strftime("%Y-%m-%d")
+    seven_days_ago_str = seven_days_ago.strftime("%Y-%m-%d")
+    fourteen_days_ago_str = fourteen_days_ago.strftime("%Y-%m-%d")
+
+    cursor.execute(
+    "SELECT COUNT(*) FROM tasks WHERE DATE(date) = DATE (?)",
+    (today_str,)
+)    
+    today_tasks = cursor.fetchone()[0]
+
+    cursor.execute("""
+    SELECT COUNT(*)
+    FROM tasks
+    WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
+    """, (seven_days_ago_str, today_str))
+
+    this_week_tasks = cursor.fetchone()[0]
+
+
+    cursor.execute(""" 
+    SELECT COUNT(*)
+    FROM tasks
+    WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
+    """,(fourteen_days_ago_str, seven_days_ago_str))
+
+    last_week_tasks = cursor.fetchone()[0]
+
+
+    if last_week_tasks == 0:
+     weekly_change = None
+     comparison = "New activity this week! 🎉"
+    else:
+     weekly_change = round(
+        ((this_week_tasks - last_week_tasks) / last_week_tasks) * 100
+    )
+
+    if this_week_tasks > last_week_tasks:
+        comparison = "Better than last week"
+    elif this_week_tasks < last_week_tasks:
+        comparison = "Lower than last week"
+    else:
+        comparison = "Same as last week"
+
+    
+    work_tasks =0 
+    Learning_tasks =0
+    Health_tasks = 0
+    Shopping_tasks = 0
+    Personal_tasks = 0
+    Hobby_tasks = 0
+    Finance_tasks = 0
+    Meeting_tasks = 0
+    Design_tasks = 0
+    Special_tasks =0
+    Other_tasks = 0
+
+    cursor.execute("SELECT category, COUNT(*) FROM tasks GROUP BY category")
+
+    rows = cursor.fetchall()
+
+    for row in rows:
+        if row[0] =="Learning":
+            Learning_tasks = row[1]
+        elif row[0] == "Work":
+            work_tasks = row[1]
+        elif row[0] == "Health":
+            Health_tasks = row[1]
+        elif row[0] == "Shopping":
+            Shopping_tasks = row[1]
+        elif row[0] == "Personal":
+            Personal_tasks = row[1]
+        elif row[0] == "Hobby":
+            Hobby_tasks = row[1]
+        elif row[0] == "Finance":
+            Finance_tasks = row[1]
+        elif row[0] == "Meeting":
+            Meeting_tasks = row[1]
+        elif row[0] == "Design":
+            Design_tasks = row[1]
+        elif row[0] == "Special Event":
+            Special_tasks = row[1]
+        elif row[0] == "Other":
+            Other_tasks = row[1]
+
+        Learning_percentage = round((Learning_tasks / total_tasks) * 100)
+        Work_percentage = round((work_tasks / total_tasks) * 100)
+        Health_percentage = round((Health_tasks / total_tasks) * 100)
+        Shopping_percentage = round((Shopping_tasks / total_tasks) * 100)
+        Personal_percentage = round((Personal_tasks / total_tasks) * 100)
+        Hobby_percentage = round((Hobby_tasks / total_tasks) * 100)
+        Finance_percentage = round((Finance_tasks / total_tasks) * 100)
+        Meeting_percentage = round((Meeting_tasks / total_tasks) * 100)
+        Design_percentage = round((Design_tasks / total_tasks) * 100)
+        Special_percentage = round((Special_tasks / total_tasks) * 100)
+        Other_percentage = round((Other_tasks / total_tasks) * 100)
+
+
     conn.close()
 
-    return redirect("/home")
-
+    return render_template(
+        "dashboard.html",
+        greeting=greeting,
+        total_tasks=total_tasks,
+        pending_tasks=pending_tasks,
+        completed_tasks=completed_tasks,
+        completed_percentage=completed_percentage,
+        today_tasks=today_tasks,
+        this_week_tasks=this_week_tasks,
+        last_week_tasks=last_week_tasks,
+        weekly_change=weekly_change,
+        comparison=comparison,
+        Learning_percentage=Learning_percentage,
+        Work_percentage=Work_percentage,
+        Health_percentage=Health_percentage,
+        Shopping_percentage=Shopping_percentage,
+        Personal_percentage=Personal_percentage,
+        Hobby_percentage=Hobby_percentage,
+        Finance_percentage=Finance_percentage,
+        Meeting_percentage=Meeting_percentage,
+        Design_percentage=Design_percentage,
+        Special_percentage=Special_percentage,
+        Other_percentage=Other_percentage
+    )
 
 @app.route("/add", methods=["POST"])
 def add():
