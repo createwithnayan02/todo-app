@@ -19,7 +19,9 @@ function closeSidebar() {
 
 const textarea = document.querySelector(".task-textarea");
 
-textarea.addEventListener("input", function () {
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-});
+if (textarea) {
+    textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+    });
+}

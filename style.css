@@ -63,3 +63,23 @@ li {
     padding: 4px 8px;
     cursor: pointer;
 }
+/* weekly graph */
+.graph {
+    width: 100%;
+    height: 250px;
+}
+
+#weeklyChart {
+    width: 100%;
+    height: 100%;
+}
+/*category chart*/
+.category-chart{
+    width:100%;
+    height:500px;
+}
+
+#categoryChart{
+    width:100%;
+    height:100%;
+}

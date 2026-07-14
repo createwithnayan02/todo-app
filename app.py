@@ -171,7 +171,7 @@ CATEGORY_KEYWORDS = {
         "gym", "exercise", "workout", "run", "running",
         "walk", "walking", "yoga", "doctor", "hospital",
         "medicine", "meditation", "fitness", "health",
-        "diet", "protein", "sleep", "cycling", "swimming"
+        "diet", "protein", "sleep", "cycling", "swimming","eat"
     ],
 
     "Shopping": [
@@ -194,7 +194,8 @@ CATEGORY_KEYWORDS = {
         "family", "mom", "mother", "dad", "father",
         "brother", "sister", "friend", "home",
         "clean room", "house", "personal",
-        "call mom", "call dad", "visit family"
+        "call mom", "call dad", "visit family","clean",
+        "enjoy","bath", "rest","call","create"
     ],
 
     "Hobby": [
@@ -271,33 +272,109 @@ def dashboard():
     seven_days_ago_str = seven_days_ago.strftime("%Y-%m-%d")
     fourteen_days_ago_str = fourteen_days_ago.strftime("%Y-%m-%d")
 
+   
+ # TODAY'S TASKS
+
     cursor.execute(
-    "SELECT COUNT(*) FROM tasks WHERE DATE(date) = DATE (?)",
+    """
+    SELECT COUNT(*)
+    FROM tasks
+    WHERE DATE(date) = DATE(?)
+    """,
     (today_str,)
-)    
+)
+
     today_tasks = cursor.fetchone()[0]
 
-    cursor.execute("""
+
+# THIS WEEK TOTAL TASKS
+
+    cursor.execute(
+    """
     SELECT COUNT(*)
     FROM tasks
     WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
-    """, (seven_days_ago_str, today_str))
+    """,
+    (seven_days_ago_str, today_str)
+)
 
     this_week_tasks = cursor.fetchone()[0]
 
 
-    cursor.execute(""" 
+# THIS WEEK CHART DATA
+
+    cursor.execute(
+    """
+    SELECT strftime('%w', date), COUNT(*)
+    FROM tasks
+    WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
+    GROUP BY strftime('%w', date)
+    """,
+    (seven_days_ago_str, today_str)
+)
+
+    this_week_data = cursor.fetchall()
+
+    this_week_dict = dict(this_week_data)
+ 
+    this_week_chart = [
+    this_week_dict.get("1", 0),  # Monday
+    this_week_dict.get("2", 0),  # Tuesday
+    this_week_dict.get("3", 0),  # Wednesday
+    this_week_dict.get("4", 0),  # Thursday
+    this_week_dict.get("5", 0),  # Friday
+    this_week_dict.get("6", 0),  # Saturday
+    this_week_dict.get("0", 0)   # Sunday
+]
+
+
+# LAST WEEK TOTAL TASKS
+
+    cursor.execute(
+    """
     SELECT COUNT(*)
     FROM tasks
     WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
-    """,(fourteen_days_ago_str, seven_days_ago_str))
+    """,
+    (fourteen_days_ago_str, seven_days_ago_str)
+)
 
     last_week_tasks = cursor.fetchone()[0]
 
 
+# LAST WEEK CHART DATA
+
+    cursor.execute(
+    """
+    SELECT strftime('%w', date), COUNT(*)
+    FROM tasks
+    WHERE DATE(date) BETWEEN DATE(?) AND DATE(?)
+    GROUP BY strftime('%w', date)
+    """,
+    (fourteen_days_ago_str, seven_days_ago_str)
+)
+
+    last_week_data = cursor.fetchall()
+
+    last_week_dict = dict(last_week_data)
+
+    last_week_chart = [
+    last_week_dict.get("1", 0),
+    last_week_dict.get("2", 0),
+    last_week_dict.get("3", 0),
+    last_week_dict.get("4", 0),
+    last_week_dict.get("5", 0),
+    last_week_dict.get("6", 0),
+    last_week_dict.get("0", 0)
+]
+
+
+# WEEKLY COMPARISON
+
     if last_week_tasks == 0:
      weekly_change = None
      comparison = "New activity this week! 🎉"
+    
     else:
      weekly_change = round(
         ((this_week_tasks - last_week_tasks) / last_week_tasks) * 100
@@ -326,6 +403,9 @@ def dashboard():
     cursor.execute("SELECT category, COUNT(*) FROM tasks GROUP BY category")
 
     rows = cursor.fetchall()
+    print(rows)
+    cursor.execute("SELECT COUNT(*) FROM tasks")
+    print(total_tasks)
 
     for row in rows:
         if row[0] =="Learning":
@@ -351,21 +431,25 @@ def dashboard():
         elif row[0] == "Other":
             Other_tasks = row[1]
 
-        Learning_percentage = round((Learning_tasks / total_tasks) * 100)
-        Work_percentage = round((work_tasks / total_tasks) * 100)
-        Health_percentage = round((Health_tasks / total_tasks) * 100)
-        Shopping_percentage = round((Shopping_tasks / total_tasks) * 100)
-        Personal_percentage = round((Personal_tasks / total_tasks) * 100)
-        Hobby_percentage = round((Hobby_tasks / total_tasks) * 100)
-        Finance_percentage = round((Finance_tasks / total_tasks) * 100)
-        Meeting_percentage = round((Meeting_tasks / total_tasks) * 100)
-        Design_percentage = round((Design_tasks / total_tasks) * 100)
-        Special_percentage = round((Special_tasks / total_tasks) * 100)
-        Other_percentage = round((Other_tasks / total_tasks) * 100)
+    category_chart = [
+        Learning_tasks,
+        work_tasks,
+        Personal_tasks,
+        Health_tasks,
+        Shopping_tasks,
+        Hobby_tasks,
+        Finance_tasks,
+        Meeting_tasks,
+        Design_tasks,
+        Special_tasks,
+        Other_tasks
+]
+    
 
 
+        
     conn.close()
-
+    print(category_chart)
     return render_template(
         "dashboard.html",
         greeting=greeting,
@@ -378,17 +462,11 @@ def dashboard():
         last_week_tasks=last_week_tasks,
         weekly_change=weekly_change,
         comparison=comparison,
-        Learning_percentage=Learning_percentage,
-        Work_percentage=Work_percentage,
-        Health_percentage=Health_percentage,
-        Shopping_percentage=Shopping_percentage,
-        Personal_percentage=Personal_percentage,
-        Hobby_percentage=Hobby_percentage,
-        Finance_percentage=Finance_percentage,
-        Meeting_percentage=Meeting_percentage,
-        Design_percentage=Design_percentage,
-        Special_percentage=Special_percentage,
-        Other_percentage=Other_percentage
+        this_week_chart = this_week_chart,
+        last_week_chart =last_week_chart,
+        category_chart=category_chart,
+        
+
     )
 
 @app.route("/add", methods=["POST"])

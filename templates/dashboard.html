@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <title>Dashboard</title>
-</head>
-<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-<script src="{{url_for('static',filename='script.js')}}"></script>
-<body>
 
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
     <div class="dashboard-container">
            <header class="dashboard-header">
             
@@ -63,63 +62,23 @@
                     <span> {{last_week_tasks}} tasks</span>
                    </div>
                    <div class="graph">
-                    
-                   <div class="graph-placeholder">Graph coming here</div>
-                   
+                   <canvas id="weeklyChart"></canvas>
                    </div>
-                 </div>
+                  </div>
+                
            </section>
 
-           <section class="dashboard-card category-card">
-             <h2 class="card-title">Category Distribution</h2>
-             <div class="card-content" >
-               <div class="category-items">
-                <span>Learning</span>
-                <span>{{ Learning_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Work</span>
-                <span>{{ Work_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Personal</span>
-                <span>{{ Personal_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Health</span>
-                <span>{{ Health_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Shopping</span>
-                <span>{{ Shopping_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Hobby</span>
-                <span>{{ Hobby_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Finance</span>
-                <span>{{ Finance_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Meeting</span>
-                <span>{{ Meeting_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Design</span>
-                <span>{{ Design_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Special Event</span>
-                <span>{{ Special_percentage }}%</span>
-                </div>
-                <div class="category-items">
-                <span>Other</span>
-                <span>{{ Other_percentage }}%</span>
-                </div>
-              </div>
-              
-           </section>
+          <section class="dashboard-card category-card">
+
+    <h2 class="card-title">Category Distribution</h2>
+
+    <div class="card-content">
+        <div class="category-chart">
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+
+   </section>
 
            <section class="dashboard-card stats-card">
              <h2 class="card-title">Statistics</h2>
@@ -162,6 +121,16 @@
          
     </main>
   </div>
+
+   <script>
+    const thisWeekChart = {{ this_week_chart | tojson }};
+    const lastWeekChart = {{ last_week_chart | tojson }};
+    const categoryChart = {{ category_chart | tojson }};
+    
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{url_for('static',filename='script.js')}}"></script>
+  <script src="{{ url_for('static', filename='chart.js') }}"></script>
     
 </body>
 </html>
