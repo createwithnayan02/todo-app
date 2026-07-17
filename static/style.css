@@ -554,9 +554,9 @@ body {
     color: white;
     cursor: pointer;
 }
-/* Back button styles for history page */
+/* Back button styles for history page and dashboard */
 .back-btn2 {
-    position: fixed;
+    position: absolute;
     top: 20px;
     left: 20px;
 
@@ -632,32 +632,20 @@ body {
 }
 
 /* SCORE CARD */
-
-.circle-container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.greeting{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-
-.progress-circle-placeholder{
-    width:180px;
-    height:180px;
-
-    border-radius:50%;
-
-    background:#dbeafe;
-
+.score-details{
     display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-weight:bold;
-}
-
-.score-text{
-    font-size:32px;
-    font-weight:bold;
-    color:#1e3a8a;
+    flex-direction:column;
+    gap:18px;
+    width:100%;
+    margin-top:30px;
+    align-self:stretch;
 }
 
 .score-item{
@@ -665,14 +653,27 @@ body {
     justify-content:space-between;
     align-items:center;
 
-    padding:10px 0;
+    width:100%;
+    padding:14px 8px;
 
-    border-bottom:1px solid #eeeeee;
+    border-bottom:1px solid #e5e7eb;
+}
+.score-item span{
+    color:#1f2937;
+    font-size:16px;
+    font-weight:600;
+}
+
+.score-item strong{
+    font-size:20px;
+    font-weight:700;
+    color:#1d1d1d;
 }
 
 .score-item:last-child{
     border-bottom:none;
 }
+
 
 /* Weekly card */
 
@@ -728,34 +729,25 @@ body {
     border-bottom:none;
 }
 
-/* Statistics */
 
-.stat-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:10px 0;
-
-    border-bottom:1px solid #eeeeee;
-}
-
-.stat-item:last-child{
-    border-bottom:none;
-}
 
 /* Achievement*/
+.achievement-card .card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
 
 .achievement-item{
-    background:#f3f4f6;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    margin-bottom:12px;
-
-    font-weight:500;
+    width: 85%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #f4f4f4;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .achievement-item:last-child{
@@ -782,4 +774,57 @@ body {
 
 .achievement-card{
     min-height:220px;
+}
+
+/* progress_circle */
+
+.progress-ring{
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+}
+
+.progress-ring svg{
+    width:100%;
+    height:100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg{
+    fill:none;
+    stroke:#e5e7eb;
+    stroke-width:14;
+}
+
+.progress-fill{
+    fill:none;
+    stroke:#3b82f6;
+    stroke-width:14;
+    stroke-linecap:round;
+
+    stroke-dasharray:440;
+    stroke-dashoffset:440;
+
+    transition:stroke-dashoffset 1.5s ease;
+}
+
+.progress-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+
+.progress-text h2{
+    margin:0;
+    font-size:34px;
+    font-weight:700;
+}
+
+.progress-text p{
+    margin-top:5px;
+    color:#666;
+    font-size:14px;
 }

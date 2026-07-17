@@ -371,21 +371,24 @@ def dashboard():
 
 # WEEKLY COMPARISON
 
-    if last_week_tasks == 0:
-     weekly_change = None
-     comparison = "New activity this week! 🎉"
-    
-    else:
-     weekly_change = round(
-        ((this_week_tasks - last_week_tasks) / last_week_tasks) * 100
-    )
+   
 
-    if this_week_tasks > last_week_tasks:
-        comparison = "Better than last week"
-    elif this_week_tasks < last_week_tasks:
-        comparison = "Lower than last week"
+    if last_week_tasks == 0:
+     comparison = "🎉 New activity this week!"
+
     else:
-        comparison = "Same as last week"
+     task_difference = this_week_tasks - last_week_tasks
+
+    if task_difference > 0:
+        comparison = f"📈 Completed {task_difference} more task{'s' if task_difference > 1 else ''} than last week"
+
+    elif task_difference < 0:
+          comparison = f"📉 Completed {abs(task_difference)} fewer task{'s' if abs(task_difference) > 1 else ''} than last week"
+
+    else:
+        comparison = "🤝 Same number of tasks as last week"
+
+        
 
     
     work_tasks =0 
@@ -444,12 +447,21 @@ def dashboard():
         Special_tasks,
         Other_tasks
 ]
+    #achivement 
+    achievements_status = [
+    ("🎯 First Task", total_tasks >= 1),
+    ("🔥 Getting Things Done", completed_tasks >= 10),
+    ("⭐ Productivity Pro", completed_tasks >= 25),
+    ("🚀 Task Champion", completed_tasks >= 50),
+    ("💯 Completed 100 Tasks", completed_tasks >= 100),
+    ("👑 FlowDo Master", completed_tasks >= 250)
+    ]
+
     
-
-
         
     conn.close()
-    print(category_chart)
+    
+   
     return render_template(
         "dashboard.html",
         greeting=greeting,
@@ -460,19 +472,18 @@ def dashboard():
         today_tasks=today_tasks,
         this_week_tasks=this_week_tasks,
         last_week_tasks=last_week_tasks,
-        weekly_change=weekly_change,
         comparison=comparison,
         this_week_chart = this_week_chart,
         last_week_chart =last_week_chart,
         category_chart=category_chart,
-        
-
+        achievements_status = achievements_status
     )
+       
 
 @app.route("/add", methods=["POST"])
 def add():
 
-    tasks_text = request.form.get("tasks")
+    tasks_text = request.form.get("tasks") 
 
     if tasks_text:
 

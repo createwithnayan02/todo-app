@@ -8,50 +8,82 @@
 <body>
     <div class="dashboard-container">
            <header class="dashboard-header">
-            
+            <div class ="greeting">
              <h1>{{ greeting }}, Nayan 👋</h1>
              <p>Keep up the great work today!</p>
-
+             </div>
 
            </header>
 
            <main class="dashboard-content">
+            <div class="dashboard-header">
+
+    <div class="dashboard-header">
+
+     <a href="/home" class="back-btn2">← Back</a>
+
+    
+
+</div>
+
         
            <section class="dashboard-card score-card">
             <h2 class="card-title">Today's Score</h2>
              <div class="card-content" >
               <div class="circle-container">
-                <div class="progress-circle-placeholder">
-                  progress circle 
-                <span class="score-text">{{ (completed_percentage) }}%</span></div>
-                </div>
-                <div class="score-item">
-                <span>completed</span>
-                <span>{{completed_tasks}}</span>
-                </div>
-                <div class="score-item">
-                  <span>pending</span>
-                <span>pending</span>
-                <span>{{pending_tasks}}</span>
-                </div>
-                <div class="score-item">
-                <span>added today</span>
-                <span>added today</span>
-                <span>{{today_tasks}}</span>
-                </div>
-                
-                </div>
+               <div class="progress-ring">
+
+    <svg width="180" height="180">
+
+        <circle
+            class="progress-bg"
+            cx="90"
+            cy="90"
+            r="70">
+        </circle>
+
+        <circle
+            class="progress-fill"
+            id="progressFill"
+            cx="90"
+            cy="90"
+            r="70">
+        </circle>
+
+    </svg>
+
+    <div class="progress-text">
+        <h2>{{ completed_percentage }}%</h2>
+        <p>Completed</p>
+    </div>
+
+</div>
+
+<div class="score-details">
+
+    <div class="score-item">
+        <span>✅ Completed</span>
+        <strong>{{ completed_tasks }}</strong>
+    </div>
+
+    <div class="score-item">
+        <span>🕒 Pending</span>
+        <strong>{{ pending_tasks }}</strong>
+    </div>
+
+    <div class="score-item">
+        <span>📅 Added Today</span>
+        <strong>{{ today_tasks }}</strong>
+    </div>
+
+</div>
                 </section>
 
               <section class="dashboard-card weekly-card">
                 <h2 class="card-title">Weekly Progress</h2>
                  <div class="card-content" >
                   <div class="weekly-change">
-                   {% if weekly_change is none %}
                    <p>{{ comparison }}</p>
-                   {% else %}
-                   <p>{{ weekly_change }}% {{ comparison }}</p>
-                   {% endif %}
                    </div>
                    <div class="weekly-stat">
                    <span> this week</span>
@@ -80,43 +112,28 @@
 
    </section>
 
-           <section class="dashboard-card stats-card">
-             <h2 class="card-title">Statistics</h2>
-             <div class="card-content" >
-              <div class="stat-item">
-                 <span>Total Tasks</span>
-                 <span>248</span>
-              </div>
-
-            <div class="stat-item">
-                <span>Completed Tasks</span>
-                <span>15</span>
-            </div>
-
-           <div class="stat-item">
-             <span>Pending Tasks</span>
-             <span>5</span>
-           </div>
-            </div>
-
-           </section>
-
            <section class="dashboard-card achievement-card">
-             <h2 class="card-title">Achievements</h2>
-             <div class="card-content" >
-                      <div class="achievement-item">
-                      🔥 5 Day Streak
-                      </div>
+            <h2 class="card-title">Achievements</h2>
 
-                      <div class="achievement-item">
-                     ⭐ Perfect Day
-                     </div>
+<div class="card-content">
 
-                      <div class="achievement-item">
-                     💯 Completed 100 Tasks
-                     </div>
-                </div>
-                </section>
+{% for achievement, unlocked in achievements_status %}
+
+    <div class="achievement-item">
+
+        {% if unlocked %}
+            ✅ {{ achievement }}
+        {% else %}
+            🔒 {{ achievement }}
+        {% endif %}
+
+    </div>
+
+{% endfor %}
+
+</div>
+ </section>
+ 
 
          
     </main>
@@ -126,6 +143,7 @@
     const thisWeekChart = {{ this_week_chart | tojson }};
     const lastWeekChart = {{ last_week_chart | tojson }};
     const categoryChart = {{ category_chart | tojson }};
+    const completedPercentage = {{ completed_percentage }};
     
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -25,3 +25,14 @@ if (textarea) {
         this.style.height = this.scrollHeight + "px";
     });
 }
+
+const circle = document.getElementById("progressFill");
+
+const radius = 70;
+const circumference = 2 * Math.PI * radius;
+
+circle.style.strokeDasharray = circumference;
+
+const offset = circumference - (completedPercentage / 100) * circumference;
+
+circle.style.strokeDashoffset = offset;
