@@ -44,6 +44,9 @@ This project is built to strengthen full-stack development skills using Flask an
 
 ##  Screenshots
 
+### Splash Page
+![Splash](assets/splash.png)
+
 
 ### Home Page
 ![Home](assets/home.png)
@@ -52,9 +55,13 @@ This project is built to strengthen full-stack development skills using Flask an
 ### Add Task Page
 ![Add Task](assets/addTask.png)
 
-### History
+### History Page
 ![History](assets/history.png)
 
+### Dashboard Page
+![Score-Card](assets/dashboard_score_card.png)
+![Weekly-progress-Card](assets/weekly_progress_card.png)
+![Category-Achievement-Card](assets/category_achievement_card.png)
 ---
 
 ##  Author
