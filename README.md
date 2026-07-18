@@ -1,71 +1,240 @@
-# TaskFlow 🚀
+# FlowDo 🚀
 
-A productivity-focused task management web application built using Flask.  
-TaskFlow helps users efficiently manage tasks with automatic categorization and a clean, responsive interface.
+**FlowDo** is a modern productivity-focused task management web application built with **Flask**. It helps users organize daily work through categorized task management, progress tracking, history logs, and an intuitive dashboard designed to improve productivity.
+
+The project was developed as a hands-on learning journey to strengthen full-stack web development skills while implementing real-world application architecture using Python, Flask, HTML, CSS, JavaScript, and SQLite.
 
 ---
 
-## Features
+# ✨ Features
 
-- Add multiple tasks at once
-- Automatic category detection
-- Task history tracking
+### 📝 Task Management
+- Create and manage multiple tasks
+- Edit task information
+- Delete unwanted tasks
+- Mark tasks as completed
+- Pending and completed task tracking
+
+### 📂 Smart Categorization
+- Assign tasks to categories such as:
+  - Meeting
+  - Learning
+  - Design
+  - Health
+  - Finance
+  - Personal
+  - Hobby
+  - Special Event
+  - Other
+
+### 📊 Productivity Dashboard
+- Overall productivity score
+- Weekly progress overview
+- Task completion statistics
+- Category distribution
+- Achievement section
+- Dashboard cards for quick insights
+
+### 📅 Task History
+- Complete history of finished tasks
+- Created date
+- Completed date
+- Status tracking
+- Clean timeline layout
+
+### 🎨 User Interface
+- Animated splash screen
+- Modern responsive layout
 - Sidebar navigation
-- Responsive and clean UI
+- Dashboard homepage
+- Category cards
+- Simple and distraction-free design
 
 ---
 
-## Tech Stack
+# 💻 Tech Stack
 
+### Backend
 - Python
 - Flask
+
+### Database
 - SQLite
-- HTML
-- CSS
+
+### Frontend
+- HTML5
+- CSS3
 - JavaScript
+
+### Version Control
+- Git
+- GitHub
 
 ---
 
-## Future Improvements
+# 📂 Project Structure
 
-- Dashboard analytics with charts
-- Productivity insights
-- Category-wise statistics
-- User authentication system
+```
+FlowDo/
+│
+├── app.py
+├── database.db
+├── templates/
+│   ├── splash.html
+│   ├── home.html
+│   ├── history.html
+│   └── dashboard.html
+│
+├── static/
+│   ├── style.css
+│   ├── script.js
+│   └── assets/
+│
+└── README.md
+```
+
+---
+
+# 🚀 Current Features
+
+✔ Splash Screen
+
+✔ Dashboard
+
+✔ Home Page
+
+✔ Task Categories
+
+✔ Add Tasks
+
+✔ Task History
+
+✔ Sidebar Navigation
+
+✔ Progress Tracking
+
+✔ Weekly Statistics
+
+✔ Category Analytics
+
+✔ Responsive Layout
+
+---
+
+# 🔮 Planned Features (Version 2)
+
+- User Authentication
+- User Profiles
+- Monthly Productivity Graphs
+- Calendar View
+- Task Reminder System
+- Due Date & Target Time
+- On Hold / In Progress Status
+- Search & Filter Tasks
+- Dark Mode
+- Notifications
+- Cloud Deployment
+- Mobile Responsive Enhancements
+
+---
+
+# 🎯 Project Goal
+
+FlowDo was built to learn how real-world web applications are designed and developed.
+
+Instead of only focusing on writing code, this project emphasizes:
+
+- Backend development with Flask
+- Database management using SQLite
+- Frontend UI/UX design
+- Responsive layouts
+- JavaScript interactions
+- Software architecture
+- Git & GitHub workflow
+- Problem solving and debugging
+- Incremental software development
+
+---
+
+# 📸 Screenshots
+
+## Splash Screen
+
+![Splash](assets/splash.png)
+
+---
+
+## Home Page
+
+![Home](assets/home.png)
+
+![Today's Tasks](assets/today's task_addTask.png)
+
+---
+
+## Dashboard
+
+### Productivity Score
+
+![Score Card](assets/dashboard_score_card.png)
+
+### Weekly Progress
+
+![Weekly Progress](assets/weekly_progress_card.png)
+
+### Category & Achievements
+
+![Category Achievement](assets/category_achievement_card.png)
+
+---
+
+## Task History
+
+![History](assets/history.png)
+
+---
+
+## 🚀 Future Improvements
+
+- Task priorities (High, Medium, Low)
+- Due date & time reminders
+- Overdue task tracking
+- Today's / Yesterday's task grouping
+- Search & filters
+- User authentication
 - Cloud deployment
 
 ---
 
-##  Project Goal
+# 📈 Development Journey
 
-This project is built to strengthen full-stack development skills using Flask and to understand real-world task management system design.
+FlowDo was developed incrementally through multiple versions.
+
+The project evolved from a basic task manager into a productivity-focused web application by continuously improving both functionality and user experience.
+
+The development process included:
+
+- Planning the application architecture
+- Designing the UI before implementation
+- Building features incrementally
+- Debugging and refactoring
+- Learning Git and GitHub version control
+- Improving the dashboard based on usability
+
+This iterative approach reflects how software is developed in real-world environments.
 
 ---
 
-##  Screenshots
+# 👩‍💻 Author
 
-### Splash Page
-![Splash](assets/splash.png)
+**Nayan Mishra**
 
+B.Tech Information Technology Student
 
-### Home Page
-![Home](assets/home.png)
-![Home](assets/today's task_addTask.png)
+Aspiring Full Stack Web Developer
 
-### Add Task Page
-![Add Task](assets/addTask.png)
+Currently focused on building practical projects and strengthening backend, frontend, and software development skills.
 
-### History Page
-![History](assets/history.png)
-
-### Dashboard Page
-![Score-Card](assets/dashboard_score_card.png)
-![Weekly-progress-Card](assets/weekly_progress_card.png)
-![Category-Achievement-Card](assets/category_achievement_card.png)
 ---
 
-##  Author
-
-- Name: Nayan Mishra  
-- Field: Information Technology Student  
-- Goal: Full Stack Developer
+⭐ If you like this project, consider giving it a star!
